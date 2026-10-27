@@ -4,9 +4,9 @@ Escribe una consulta SQL que devuelva el nombre del producto y la fecha de la ú
 SELECT 
     p.nombre AS Producto, 
     MAX(i.fechaSubida) AS Ultima_Subida
-FROM Producto p
-JOIN TipoProducto tp ON p.tipoProductoId = tp.id
-JOIN Imagen i ON p.id = i.productoId
+FROM Productos p
+JOIN TiposProducto tp ON p.tipoProductoId = tp.id
+JOIN Imagenes i ON p.id = i.productoId
 WHERE tp.nombre = 'Digitales'
 GROUP BY p.id;
 ```

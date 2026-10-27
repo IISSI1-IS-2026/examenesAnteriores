@@ -24,8 +24,6 @@ Escribe una consulta SQL que devuelva el nombre del producto y el número total 
 
 Se ha definido la siguiente regla de negocio: "Un producto no puede tener más de 5 fotos en total". Crear un trigger que se ejecute antes de insertar una nueva imagen y muestre un mensaje por pantalla en caso de no cumplirse.
 
-Además, si la nueva foto viene marcada como "principal", se debe asegurar que sea la única. Para ello, el trigger debe modificar las fotos anteriores de ese producto para que dejen de ser principales antes de guardar la nueva.
-
 ### NOTA. Avisar a profesor ANTES de realizar la entrega
 
 Antes de realizar la entrega, levante la mano y muestre su DNI o similar al profesor del aula para la verificación de su identidad.
