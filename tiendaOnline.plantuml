@@ -1,0 +1,103 @@
+@startuml tiendaOnline
+skinparam classAttributeIconSize 0
+
+' =====================
+' Enumeraciones
+' =====================
+enum TipoProducto {
+  Fisico
+  Digital
+}
+
+' =====================
+' Clases / Entidades
+' =====================
+class Producto <<Entity>> {
+  nombre
+  descripcion [0..1]
+  precioUnitario
+  stock
+  puedeVenderseAMenores = true
+  tipo : TipoProducto
+}
+
+class Pedido <<Entity>> {
+  fechaRealizacion
+  fechaEnvio [0..1]
+  direccionEntrega
+  comentarios [0..1]
+  /precio
+}
+
+class LineaPedido <<Entity>> {
+  unidades
+  precioUnitario
+}
+
+class Usuario <<Entity>> {
+  email
+  contraseña
+  nombre
+}
+
+class Empleado <<Entity>> {
+  salario
+}
+
+class Cliente <<Entity>> {
+  direccionEnvio
+  codigoPostal
+  fechaNacimiento
+}
+
+' =====================
+' Relaciones
+' =====================
+
+' Asociación Pedido–Producto
+Pedido "*" -- "*" Producto : contiene
+
+' Clase de asociación
+( Pedido, Producto ) .. LineaPedido
+
+Empleado "0..1" -- "*" Pedido : gestiona
+Cliente "1" -- "*" Pedido : realiza
+
+Usuario <|-- Empleado
+Usuario <|-- Cliente
+
+note top of Usuario
+{complete, disjoint}
+end note
+
+' =====================
+' Reglas de Negocio
+' =====================
+note top of Pedido
+RN-003: Los clientes menores de 18 años
+no podrán pedir productos que
+puedeVenderseAMenores
+end note
+
+note right of Usuario
+RN-001: La contraseña debe
+ser de al menos 8 caracteres
+end note
+
+note right of Cliente
+RN-002: El cliente debe
+ser mayor de 14 años
+end note
+
+note left of Producto
+RN-004: El precio unitario
+no puede ser negativo
+end note
+
+note bottom of LineaPedido
+RN-005: La cantidad tiene
+que ser mayor que 0 y
+no puede superar las 100 unidades
+end note
+
+@enduml
